@@ -1,5 +1,6 @@
 package com.example.parakeet;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -24,9 +25,13 @@ public class LoginActivity extends AppCompatActivity {
 
 
         binding.loginButton.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, LandingPageActivity.class);
+            Intent intent = LandingPageActivity.landingPageActivityIntentFactory(LoginActivity.this);
             startActivity(intent);
-            finish();
         });
+    }
+
+    static Intent loginActivityIntentFactory(Context context){
+        Intent intent = new Intent(context, LoginActivity.class);
+        return intent;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.parakeet;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -23,8 +24,13 @@ public class LandingPageActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         binding.generalInfoButton.setOnClickListener(v -> {
-            Intent intent = new Intent(LandingPageActivity.this, LoginActivity.class);
+            Intent intent = LoginActivity.loginActivityIntentFactory(LandingPageActivity.this);
             startActivity(intent);
         });
+    }
+
+    static Intent landingPageActivityIntentFactory(Context context){
+        Intent intent = new Intent(context, LandingPageActivity.class);
+        return intent;
     }
 }

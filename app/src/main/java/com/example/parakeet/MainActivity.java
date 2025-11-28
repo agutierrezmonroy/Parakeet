@@ -1,5 +1,6 @@
 package com.example.parakeet;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -24,14 +25,20 @@ public class MainActivity extends AppCompatActivity {
 
 
         binding.previousLoginButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+            Intent intent = LoginActivity.loginActivityIntentFactory(MainActivity.this);
             startActivity(intent);
         });
 
         binding.createAccountButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            Intent intent = LoginActivity.loginActivityIntentFactory(MainActivity.this);
             startActivity(intent);
         });
     }
+
+    static Intent mainActivityIntentFactory(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        return intent;
+    }
 }
-//T
+
+
