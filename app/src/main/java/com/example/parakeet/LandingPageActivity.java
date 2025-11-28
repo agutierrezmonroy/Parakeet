@@ -1,6 +1,8 @@
 package com.example.parakeet;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +21,15 @@ public class LandingPageActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        Button generalInfoButton = findViewById(R.id.generalInfoButton);
+        Button locationButton = findViewById(R.id.locationButton);
+        Button caughtInfoButton = findViewById(R.id.caughtInfoButton);
+
+        generalInfoButton.setOnClickListener(v -> {
+            Intent intent = new Intent(LandingPageActivity.this, LoginActivity.class);
+            startActivity(intent);
         });
     }
 }
