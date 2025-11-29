@@ -1,6 +1,6 @@
 package com.example.parakeet.Parakeet_Database.Entities;
 
-import com.example.parakeet.Parakeet_Database.Database;
+import com.example.parakeet.Parakeet_Database.typeConverters.Database;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -13,12 +13,11 @@ public class User {
 
     private String username;
     private String password;
-    private boolean is_admin;
+    private boolean is_admin = false;
 
-    public User(String username, String password, boolean is_admin) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.is_admin = is_admin;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.example.parakeet.Parakeet_Database;
+package com.example.parakeet.Parakeet_Database.typeConverters;
 
 import android.content.Context;
 import android.util.Log;
@@ -46,9 +46,17 @@ public abstract class Database extends RoomDatabase {
         public void onCreate(@NonNull SupportSQLiteDatabase db){
             super.onCreate(db);
             Log.i(MainActivity.TAG, "DATABASE CREATED!");
-            //TODO
+            databaseWriteExecutor.execute(  () -> {
+               UserDAO userDao = INSTANCE.userDAO();
+               userDao.deleteAll();
+               User admin2 = new User("admin2", "admin2");
+               admin2.setIs_admin(true);
+               userDao.insert(admin2);
+               User testUser1 = new User("testuser1", "testuser1");
+               userDao.insert(testUser1);
+            });
         }
     };
 
-    public abstract DAO parakeetDAO();
+    public abstract UserDAO userDAO();
 }

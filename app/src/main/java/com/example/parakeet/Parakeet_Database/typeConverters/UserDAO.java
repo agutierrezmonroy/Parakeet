@@ -1,4 +1,4 @@
-package com.example.parakeet.Parakeet_Database;
+package com.example.parakeet.Parakeet_Database.typeConverters;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
@@ -10,10 +10,12 @@ import com.example.parakeet.Parakeet_Database.Entities.User;
 import java.util.ArrayList;
 
 @Dao
-public interface DAO {
+public interface UserDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(User user);
 
     @Query("Select * from " + Database.PARAKEET_TABLE)
     ArrayList<User> getAllUsers();
+
+    void deleteAll();
 }
