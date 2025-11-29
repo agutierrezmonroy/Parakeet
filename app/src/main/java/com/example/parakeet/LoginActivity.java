@@ -23,6 +23,8 @@ public class LoginActivity extends AppCompatActivity {
     private User user = null;
     ActivityLoginBinding binding;
 
+    private Boolean isAdmin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
 
         binding.loginButton.setOnClickListener(v -> {
             if (verifyUser()) {
-                Intent intent = LandingPageActivity.landingPageActivityIntentFactory(LoginActivity.this);
+                Intent intent = LandingPageActivity.landingPageActivityIntentFactory(LoginActivity.this, isAdmin);
                 startActivity(intent);
             }
         });
@@ -55,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         if (user != null){
             String password = binding.passwordEditText.getText().toString();
             if (password.equals(user.getPassword())){
+                isAdmin = user.isIs_admin();
                 return true;
             } else {
                 toastMaker("Invalid Password");

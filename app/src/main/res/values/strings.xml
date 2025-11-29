@@ -12,4 +12,5 @@
     <string name="general_information">GENERAL INFORMATION</string>
     <string name="returnToMenu">RETURN</string>
     <string name="logout">LOGOUT</string>
+    <string name="admin">Admin</string>
 </resources>

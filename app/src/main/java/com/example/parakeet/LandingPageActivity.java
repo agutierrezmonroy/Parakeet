@@ -3,6 +3,7 @@ package com.example.parakeet;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
@@ -14,6 +15,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.parakeet.databinding.ActivityLandingPageBinding;
 
 public class LandingPageActivity extends AppCompatActivity {
+    private static final String ADMIN_KEY = "com.example.parakeet.admin";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,13 +24,18 @@ public class LandingPageActivity extends AppCompatActivity {
         ActivityLandingPageBinding binding = ActivityLandingPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        boolean isAdmin = getIntent().getBooleanExtra(ADMIN_KEY, false);
+        if (isAdmin) binding.adminButton.setVisibility(View.VISIBLE);
+
         binding.logOutButton.setOnClickListener(v -> {
             Intent intent = LoginActivity.loginActivityIntentFactory(LandingPageActivity.this);
             startActivity(intent);
         });
     }
 
-    static Intent landingPageActivityIntentFactory(Context context){
-        return new Intent(context, LandingPageActivity.class);
+    static Intent landingPageActivityIntentFactory(Context context, Boolean isAdmin){
+        Intent intent = new Intent(context, LandingPageActivity.class);
+        intent.putExtra(ADMIN_KEY, isAdmin);
+        return intent;
     }
 }

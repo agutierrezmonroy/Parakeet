@@ -68,4 +68,16 @@
         android:backgroundTint="#000"
         />
 
+    <Button
+        android:id="@+id/adminButton"
+        android:text="@string/admin"
+        app:layout_constraintTop_toBottomOf="@id/logOutButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:backgroundTint="#000"
+        android:visibility="invisible"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
