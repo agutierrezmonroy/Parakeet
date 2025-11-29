@@ -10,4 +10,6 @@
     <string name="caught_fish_info">CAUGHT FISH INFO</string>
     <string name="location">LOCATION</string>
     <string name="general_information">GENERAL INFORMATION</string>
+    <string name="returnToMenu">RETURN</string>
+    <string name="logout">LOGOUT</string>
 </resources>

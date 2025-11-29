@@ -15,22 +15,19 @@ import com.example.parakeet.databinding.ActivityLandingPageBinding;
 
 public class LandingPageActivity extends AppCompatActivity {
 
-    private ActivityLandingPageBinding binding;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = binding.inflate(getLayoutInflater());
+        ActivityLandingPageBinding binding = ActivityLandingPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.generalInfoButton.setOnClickListener(v -> {
+        binding.logOutButton.setOnClickListener(v -> {
             Intent intent = LoginActivity.loginActivityIntentFactory(LandingPageActivity.this);
             startActivity(intent);
         });
     }
 
     static Intent landingPageActivityIntentFactory(Context context){
-        Intent intent = new Intent(context, LandingPageActivity.class);
-        return intent;
+        return new Intent(context, LandingPageActivity.class);
     }
 }
