@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
+        repository = Repository.getRepository(getApplication());
 
 
         binding.loginButton.setOnClickListener(v -> {

@@ -11,15 +11,20 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.room.RoomSQLiteQuery;
+
+import com.example.parakeet.Parakeet_Database.Repository;
 import com.example.parakeet.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Repository repository;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        repository = Repository.getRepository(getApplication());
 
 
         binding.previousLoginButton.setOnClickListener(v -> {

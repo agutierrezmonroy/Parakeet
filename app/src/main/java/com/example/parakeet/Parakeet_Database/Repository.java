@@ -49,7 +49,7 @@ public class Repository {
                 () -> userDAO.getUserByUsername(username));
 
         try {
-            future.get();
+             return future.get();
         } catch (InterruptedException | ExecutionException e) {
             Log.i("TKL", "Problem when getting user by username");
         }
