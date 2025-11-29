@@ -46,9 +46,10 @@ public class Repository {
 
 
 
-    public void insertUser(User... user) {
+  /*  public void insertUser(User... user) {
         Database.databaseWriteExecutor.execute(() ->
-                userDAO.insert(user));
+             userDAO.insert(user));
 
     }
+    */
 }

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 @Dao
 public interface UserDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(User[] user);
+    void insert(User user);
 
     @Query("Select * from " + Database.PARAKEET_TABLE)
     ArrayList<User> getAllUsers();
