@@ -12,18 +12,18 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 public class Repository {
-    private final UserDAO parakeetDAO;
-    private ArrayList<User> users;
+
+    private final UserDAO userDAO;
     private static Repository repository;
 
-    private Repository(Application application){
+    private Repository(Application application) {
         Database db = Database.getDatabase(application);
-        this.parakeetDAO = db.userDAO();
-        this.users = (ArrayList<User>) this.parakeetDAO.getAllUsers();
+
+        this.userDAO = db.userDAO();
     }
 
-    public static Repository getRepository(Application application){
-        if (repository != null){
+    public static Repository getRepository(Application application) {
+        if (repository != null) {
             return repository;
         }
 
@@ -37,36 +37,19 @@ public class Repository {
         );
         try {
             return future.get();
-        } catch(InterruptedException | ExecutionException e){
+        } catch (InterruptedException | ExecutionException e) {
             Log.d(MainActivity.TAG, "Problem getting Repository, thread error.");
         }
 
         return null;
     }
 
-    public ArrayList<User> getUsers() {
-        Future<ArrayList<User>> future = Database.databaseWriteExecutor.submit(
-                new Callable<ArrayList<User>>() {
-                    @Override
-                    public ArrayList<User> call() throws Exception {
-                        return (ArrayList<User>) parakeetDAO.getAllUsers();
-                    }
-                }
 
-        );
-        try{
-            return future.get();
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-            Log.i(MainActivity.TAG,"Problem when getting all GymLogs in the repository" );
-        }
 
-        return null;
-    }
-
-    public void insertUser(User... user){
-        Database.databaseWriteExecutor.execute(()->
-                parakeetDAO.insert(user));
+    public void insertUser(User... user) {
+        Database.databaseWriteExecutor.execute(() ->
+             userDAO.insert(user));
 
     }
+
 }
