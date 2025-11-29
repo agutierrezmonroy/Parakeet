@@ -7,16 +7,17 @@ import androidx.room.Query;
 
 import com.example.parakeet.Parakeet_Database.Entities.User;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 @Dao
 public interface UserDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(User... user);
 
-    @Query("Select * from " + Database.PARAKEET_TABLE)
+/*
+*  @Query("Select * from " + Database.PARAKEET_TABLE)
     ArrayList<User> getAllUsers();
-
+* */
     @Query("DELETE FROM " + Database.PARAKEET_TABLE)
     void deleteAll();
 }
