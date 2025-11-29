@@ -1,4 +1,4 @@
-package com.example.parakeet.Parakeet_Database.typeConverters;
+package com.example.parakeet.Parakeet_Database;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 @Dao
 public interface UserDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(User user);
+    void insert(User[] user);
 
     @Query("Select * from " + Database.PARAKEET_TABLE)
     ArrayList<User> getAllUsers();

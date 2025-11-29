@@ -1,6 +1,6 @@
 package com.example.parakeet.Parakeet_Database.Entities;
 
-import com.example.parakeet.Parakeet_Database.typeConverters.Database;
+import com.example.parakeet.Parakeet_Database.Database;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 

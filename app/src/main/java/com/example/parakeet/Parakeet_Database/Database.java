@@ -1,4 +1,4 @@
-package com.example.parakeet.Parakeet_Database.typeConverters;
+package com.example.parakeet.Parakeet_Database;
 
 import android.content.Context;
 import android.util.Log;
