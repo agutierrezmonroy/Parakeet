@@ -38,10 +38,23 @@ public class Repository {
         try {
             return future.get();
         } catch (InterruptedException | ExecutionException e) {
-            Log.d(MainActivity.TAG, "Problem getting Repository, thread error.");
+            Log.d("TKl", "Problem getting Repository, thread error.");
         }
 
         return null;
+    }
+
+    public User getUserByUsername(String username) {
+        Future<User> future = Database.databaseWriteExecutor.submit(
+                () -> userDAO.getUserByUsername(username));
+
+        try {
+            future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.i("TKL", "Problem when getting user by username");
+        }
+        return null;
+
     }
 
 

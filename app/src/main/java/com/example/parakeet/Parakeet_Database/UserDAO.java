@@ -14,9 +14,9 @@ public interface UserDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(User... user);
 
-    @Query("Select * from " + Database.PARAKEET_TABLE)
-    ArrayList<User> getAllUsers();
-
     @Query("DELETE FROM " + Database.PARAKEET_TABLE)
     void deleteAll();
+
+    @Query("SELECT * from " + Database.PARAKEET_TABLE + " WHERE username == :username")
+    User getUserByUsername(String username);
 }
