@@ -15,6 +15,7 @@ import com.example.parakeet.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String TAG = "PARAKEET_TAG";
     private ActivityMainBinding binding;
 
     @Override
