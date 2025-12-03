@@ -6,7 +6,7 @@
     <string name="password">PASSWORD</string>
     <string name="login">LOGIN</string>
     <string name="create_account">CREATE ACCOUNT</string>
-    <string name="welcome">Welcome</string>
+    <string name="welcome">Welcome %1$s</string>
     <string name="caught_fish_info">CAUGHT FISH INFO</string>
     <string name="location">LOCATION</string>
     <string name="general_information">GENERAL INFORMATION</string>

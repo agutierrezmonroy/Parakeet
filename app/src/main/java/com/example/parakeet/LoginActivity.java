@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
 
         binding.loginButton.setOnClickListener(v -> {
             if (verifyUser()) {
-                Intent intent = LandingPageActivity.landingPageActivityIntentFactory(LoginActivity.this, isAdmin);
+                Intent intent = LandingPageActivity.landingPageActivityIntentFactory(LoginActivity.this, isAdmin, user.getUsername());
                 startActivity(intent);
             }
         });
