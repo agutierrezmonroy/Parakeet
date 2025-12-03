@@ -27,6 +27,11 @@ public class LandingPageActivity extends AppCompatActivity {
         boolean isAdmin = getIntent().getBooleanExtra(ADMIN_KEY, false);
         if (isAdmin) binding.adminButton.setVisibility(View.VISIBLE);
 
+        binding.generalInfoButton.setOnClickListener(v -> {
+            Intent intent = GeneralInfoActivity.generalInfoActivityIntentFactory(LandingPageActivity.this, isAdmin);
+            startActivity(intent);
+        });
+
         binding.logOutButton.setOnClickListener(v -> {
             Intent intent = LoginActivity.loginActivityIntentFactory(LandingPageActivity.this);
             startActivity(intent);
