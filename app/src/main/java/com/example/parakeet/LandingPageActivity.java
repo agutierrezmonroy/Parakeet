@@ -36,6 +36,11 @@ public class LandingPageActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        binding.locationButton.setOnClickListener(v ->{
+            Intent intent = LocationActivity.locationActivityIntentFactory(LandingPageActivity.this, isAdmin, username);
+            startActivity(intent);
+        });
+
         binding.logOutButton.setOnClickListener(v -> {
             Intent intent = LoginActivity.loginActivityIntentFactory(LandingPageActivity.this);
             startActivity(intent);
