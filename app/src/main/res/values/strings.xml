@@ -13,4 +13,8 @@
     <string name="returnToMenu">RETURN</string>
     <string name="logout">LOGOUT</string>
     <string name="admin">Admin</string>
+    <string name="total_fish_amp_bait"><![CDATA[Total Fish & Bait]]></string>
+    <string name="total_fish_caught">Total Fish Caught</string>
+    <string name="fishing_timer">Fishing Timer</string>
+    <string name="return_to_welcome_hub">RETURN TO WELCOME HUB</string>
 </resources>
