@@ -1,12 +1,13 @@
 package com.example.parakeet.Parakeet_Database.Entities;
 
-import com.example.parakeet.Parakeet_Database.Database;
+import com.example.parakeet.Parakeet_Database.FishDatabase;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.util.Objects;
 
-@Entity(tableName = Database.PARAKEET_TABLE)
+@Entity(tableName = FishDatabase.PARAKEET_TABLE)
 public class User {
     @PrimaryKey(autoGenerate = true)
     private int id;

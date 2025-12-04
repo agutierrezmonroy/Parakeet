@@ -3,11 +3,8 @@ package com.example.parakeet.Parakeet_Database;
 import android.app.Application;
 import android.util.Log;
 
-import com.example.parakeet.MainActivity;
 import com.example.parakeet.Parakeet_Database.Entities.User;
 
-import java.util.ArrayList;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -17,7 +14,7 @@ public class Repository {
     private static Repository repository;
 
     private Repository(Application application) {
-        Database db = Database.getDatabase(application);
+        FishDatabase db = FishDatabase.getDatabase(application);
 
         this.userDAO = db.userDAO();
     }
@@ -27,13 +24,8 @@ public class Repository {
             return repository;
         }
 
-        Future<Repository> future = Database.databaseWriteExecutor.submit(
-                new Callable<Repository>() {
-                    @Override
-                    public Repository call() throws Exception {
-                        return new Repository(application);
-                    }
-                }
+        Future<Repository> future = FishDatabase.databaseWriteExecutor.submit(
+                () -> new Repository(application)
         );
         try {
             return future.get();
@@ -45,7 +37,7 @@ public class Repository {
     }
 
     public User getUserByUsername(String username) {
-        Future<User> future = Database.databaseWriteExecutor.submit(
+        Future<User> future = FishDatabase.databaseWriteExecutor.submit(
                 () -> userDAO.getUserByUsername(username));
 
         try {
@@ -60,7 +52,7 @@ public class Repository {
 
 
     public void insertUser(User... user) {
-        Database.databaseWriteExecutor.execute(() ->
+        FishDatabase.databaseWriteExecutor.execute(() ->
              userDAO.insert(user));
 
     }
