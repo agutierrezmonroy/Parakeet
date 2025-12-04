@@ -26,6 +26,11 @@ public class LocationActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         boolean isAdmin = getIntent().getBooleanExtra(ADMIN_KEY, false);
         String username = getIntent().getStringExtra(USERNAME_KEY);
+
+        binding.setLocationButton.setOnClickListener(v -> {
+            Intent intent = LocationFoundActivity.locationFoundActivityIntentFactory(LocationActivity.this, isAdmin, username);
+            startActivity(intent);
+        });
     }
 
 
