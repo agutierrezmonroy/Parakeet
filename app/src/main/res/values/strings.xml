@@ -21,4 +21,7 @@
     <string name="enter_location">Enter location</string>
     <string name="set_as_favorite_location">Set as favorite location</string>
     <string name="enter_location_button">ENTER LOCATION</string>
+    <string name="fish_information">Fish Information</string>
+    <string name="type_of_fish">Type of Fish:</string>
+    <string name="create_account_">Create Account</string>
 </resources>
