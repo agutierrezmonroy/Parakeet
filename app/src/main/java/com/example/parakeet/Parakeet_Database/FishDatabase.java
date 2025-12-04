@@ -1,34 +1,36 @@
 package com.example.parakeet.Parakeet_Database;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.example.parakeet.MainActivity;
 import com.example.parakeet.Parakeet_Database.Entities.User;
+import com.example.parakeet.Parakeet_Database.typeConverters.LocalDateTypeConverter;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@androidx.room.Database(entities = {User.class}, version = 1, exportSchema = false)
-public abstract class Database extends RoomDatabase {
+@TypeConverters(LocalDateTypeConverter.class)
+@Database(entities = {User.class}, version = 1, exportSchema = false)
+public abstract class FishDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "ParakeetDatabase";
     public static final String PARAKEET_TABLE = "ParakeetTable";
-    private static volatile Database INSTANCE;
+    private static volatile FishDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
 
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
-    static Database getDatabase(final Context context){
+    static FishDatabase getDatabase(final Context context){
         if(INSTANCE == null){
-            synchronized (Database.class){
+            synchronized (FishDatabase.class){
                 if (INSTANCE == null){
                     INSTANCE = Room.databaseBuilder(
                             context.getApplicationContext(),
-                            Database.class,
+                            FishDatabase.class,
                                 DATABASE_NAME
                             )
                             .fallbackToDestructiveMigration()
