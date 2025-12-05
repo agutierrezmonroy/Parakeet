@@ -3,6 +3,8 @@ package com.example.parakeet.Parakeet_Database;
 import android.app.Application;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.parakeet.Parakeet_Database.Entities.User;
 
 import java.util.concurrent.ExecutionException;
@@ -36,17 +38,8 @@ public class Repository {
         return null;
     }
 
-    public User getUserByUsername(String username) {
-        Future<User> future = FishDatabase.databaseWriteExecutor.submit(
-                () -> userDAO.getUserByUsername(username));
-
-        try {
-             return future.get();
-        } catch (InterruptedException | ExecutionException e) {
-            Log.i("TKL", "Problem when getting user by username");
-        }
-        return null;
-
+    public LiveData<User> getUserByUsername(String username) {
+        return userDAO.getUserByUsername(username);
     }
 
 

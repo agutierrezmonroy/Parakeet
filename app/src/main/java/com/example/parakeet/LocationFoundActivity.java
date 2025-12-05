@@ -16,7 +16,7 @@ import com.example.parakeet.databinding.ActivityLocationFoundBinding;
 public class LocationFoundActivity extends AppCompatActivity {
 
     ActivityLocationFoundBinding binding;
-    private static final String ADMIN_KEY = "com.example.parakeet.admin";
+
     private static final String USERNAME_KEY = "com.example.parakeet.username";
 
     @Override
@@ -24,18 +24,16 @@ public class LocationFoundActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityLocationFoundBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        boolean isAdmin = getIntent().getBooleanExtra(ADMIN_KEY, false);
         String username = getIntent().getStringExtra(USERNAME_KEY);
 
         binding.locatiionReturnButton.setOnClickListener(v -> {
-            Intent intent = LandingPageActivity.landingPageActivityIntentFactory(LocationFoundActivity.this, isAdmin, username);
+            Intent intent = LandingPageActivity.landingPageActivityIntentFactory(LocationFoundActivity.this, username);
             startActivity(intent);
         });
     }
 
-    static Intent locationFoundActivityIntentFactory(Context context, Boolean isAdmin, String username) {
+    static Intent locationFoundActivityIntentFactory(Context context, String username) {
         Intent intent = new Intent(context, LocationFoundActivity.class);
-        intent.putExtra(ADMIN_KEY, isAdmin);
         intent.putExtra(USERNAME_KEY, username);
         return intent;
     }

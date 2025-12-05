@@ -1,5 +1,6 @@
 package com.example.parakeet.Parakeet_Database;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -16,5 +17,5 @@ public interface UserDAO {
     void deleteAll();
 
     @Query("SELECT * from " + FishDatabase.PARAKEET_TABLE + " WHERE username == :username")
-    User getUserByUsername(String username);
+    LiveData<User> getUserByUsername(String username);
 }
