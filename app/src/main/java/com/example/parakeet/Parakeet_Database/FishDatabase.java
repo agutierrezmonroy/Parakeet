@@ -33,7 +33,7 @@ public abstract class FishDatabase extends RoomDatabase {
                             FishDatabase.class,
                                 DATABASE_NAME
                             )
-                            .fallbackToDestructiveMigration()
+                            .fallbackToDestructiveMigration(true)
                             .addCallback(addDefaultValues)
                             .build();
 
