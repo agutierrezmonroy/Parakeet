@@ -42,7 +42,7 @@
         />
 
     <Button
-        android:id="@+id/locatiionReturnButton"
+        android:id="@+id/location_return_button"
         android:text="@string/return_to_welcome_hub"
         android:backgroundTint="@color/black"
         android:layout_width="300dp"

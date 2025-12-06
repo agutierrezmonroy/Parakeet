@@ -24,5 +24,8 @@
     <string name="fish_found_in_1_s">Fish found in %1$s</string>
     <string name="fish">Fish!</string>
     <string name="fish_information">Fish Information</string>
-    <string name="type_of_fish">Type of Fish:</string>
+    <string name="type_of_fish">Type of Fish</string>
+    <string name="fish_length">Fish length</string>
+    <string name="fish_weight">Fish Weight</string>
+    <string name="enter_fish_information">Enter Fish Information</string>
 </resources>

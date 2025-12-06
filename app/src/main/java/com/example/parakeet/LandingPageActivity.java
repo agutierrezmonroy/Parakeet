@@ -31,8 +31,8 @@ public class LandingPageActivity extends AppCompatActivity {
         repository = Repository.getRepository(getApplication());
 
         String username = getIntent().getStringExtra(USERNAME_KEY);
-        LiveData<User> userObeserver = repository.getUserByUsername(username);
-        userObeserver.observe(this, user -> {
+        LiveData<User> userObserver = repository.getUserByUsername(username);
+        userObserver.observe(this, user -> {
             if(user.isIs_admin()){
                 binding.adminButton.setVisibility(View.VISIBLE);
             }
@@ -46,6 +46,11 @@ public class LandingPageActivity extends AppCompatActivity {
 
             binding.locationButton.setOnClickListener(v ->{
                 Intent intent = LocationActivity.locationActivityIntentFactory(LandingPageActivity.this, username);
+                startActivity(intent);
+            });
+
+            binding.caughtInfoButton.setOnClickListener(v -> {
+                Intent intent = FishInformationActivity.fishInformationActivityIntentFactory(LandingPageActivity.this, username);
                 startActivity(intent);
             });
 
