@@ -68,8 +68,8 @@ public class LoginActivity extends AppCompatActivity {
             toastMaker("Username may not be blank.");
             return;
         }
-        LiveData<User> userObeserver = repository.getUserByUsername(username);
-        userObeserver.observe(this, user ->{
+        LiveData<User> userObserver = repository.getUserByUsername(username);
+        userObserver.observe(this, user ->{
             if (user != null) {
                 String password = binding.passwordEditText.getText().toString();
                 if (password.equals(user.getPassword())){
@@ -83,13 +83,13 @@ public class LoginActivity extends AppCompatActivity {
             else {
                 toastMaker(String.format("%s is not a valid username", username));
             }
-            userObeserver.removeObservers(this);
+            userObserver.removeObservers(this);
         });
     }
 
     private void createNewUser() {
-        String username = binding.usernameEditText.getText().toString().trim();
-        String password = binding.passwordEditText.getText().toString().trim();
+        String username = binding.usernameEditText.getText().toString();
+        String password = binding.passwordEditText.getText().toString();
 
         if (username.isEmpty() || password.isEmpty()) {
             toastMaker("Username and password may not be blank.");
