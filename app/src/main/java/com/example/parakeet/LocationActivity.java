@@ -16,7 +16,6 @@ import com.example.parakeet.databinding.ActivityLocationBinding;
 public class LocationActivity extends AppCompatActivity {
 
     ActivityLocationBinding binding;
-    private static final String ADMIN_KEY = "com.example.parakeet.admin";
     private static final String USERNAME_KEY = "com.example.parakeet.username";
 
     @Override

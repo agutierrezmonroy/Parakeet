@@ -30,17 +30,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         binding.previousLoginButton.setOnClickListener(v -> {
-            Intent intent = LoginActivity.loginActivityIntentFactory(MainActivity.this);
+            Intent intent = LoginActivity.loginActivityIntentFactory(MainActivity.this, false);
             startActivity(intent);
         });
 
         binding.createAccountButton.setOnClickListener(v -> {
-            Intent intent = LoginActivity.loginActivityIntentFactory(MainActivity.this);
-            startActivity(intent);
-        });
-
-        binding.createAccountButton.setOnClickListener(v -> {
-            Intent intent = CreateAccountActivity.createAccountIntentFactory(MainActivity.this);
+            Intent intent = LoginActivity.loginActivityIntentFactory(MainActivity.this, true);
             startActivity(intent);
         });
 

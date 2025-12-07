@@ -18,7 +18,6 @@ import com.example.parakeet.Parakeet_Database.Repository;
 import com.example.parakeet.databinding.ActivityLandingPageBinding;
 
 public class LandingPageActivity extends AppCompatActivity {
-    private static final String ADMIN_KEY = "com.example.parakeet.admin";
     private static final String USERNAME_KEY = "com.example.parakeet.username";
     private Repository repository;
 
@@ -55,7 +54,7 @@ public class LandingPageActivity extends AppCompatActivity {
             });
 
             binding.logOutButton.setOnClickListener(v -> {
-                Intent intent = LoginActivity.loginActivityIntentFactory(LandingPageActivity.this);
+                Intent intent = LoginActivity.loginActivityIntentFactory(LandingPageActivity.this, false);
                 startActivity(intent);
             });
         });
