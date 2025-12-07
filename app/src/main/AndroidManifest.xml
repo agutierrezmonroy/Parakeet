@@ -12,10 +12,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Parakeet">
         <activity
+            android:name=".FishInformationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LocationFoundActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LocationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GeneralInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".LandingPageActivity"
             android:exported="true" />
         <activity
             android:name=".LoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".CreateAccountActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

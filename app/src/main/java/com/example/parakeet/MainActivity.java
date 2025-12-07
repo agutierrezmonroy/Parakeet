@@ -17,6 +17,8 @@ import com.example.parakeet.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String TAG = "Para_Keet";
+
     private Repository repository;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,12 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = LoginActivity.loginActivityIntentFactory(MainActivity.this);
             startActivity(intent);
         });
+
+        binding.createAccountButton.setOnClickListener(v -> {
+            Intent intent = CreateAccountActivity.createAccountIntentFactory(MainActivity.this);
+            startActivity(intent);
+        });
+
     }
 
     static Intent mainActivityIntentFactory(Context context) {

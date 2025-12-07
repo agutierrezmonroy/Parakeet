@@ -6,11 +6,26 @@
     <string name="password">PASSWORD</string>
     <string name="login">LOGIN</string>
     <string name="create_account">CREATE ACCOUNT</string>
-    <string name="welcome">Welcome</string>
+    <string name="welcome">Welcome %1$s</string>
     <string name="caught_fish_info">CAUGHT FISH INFO</string>
     <string name="location">LOCATION</string>
     <string name="general_information">GENERAL INFORMATION</string>
     <string name="returnToMenu">RETURN</string>
     <string name="logout">LOGOUT</string>
     <string name="admin">Admin</string>
+    <string name="total_fish_amp_bait"><![CDATA[Total Fish & Bait]]></string>
+    <string name="total_fish_caught">Total Fish Caught</string>
+    <string name="fishing_timer">Fishing Timer</string>
+    <string name="return_to_welcome_hub">RETURN TO WELCOME HUB</string>
+    <string name="enter_the_location">Enter the Location</string>
+    <string name="enter_location">Enter location</string>
+    <string name="set_as_favorite_location">Set as favorite location</string>
+    <string name="enter_location_button">ENTER LOCATION</string>
+    <string name="fish_found_in_1_s">Fish found in %1$s</string>
+    <string name="fish">Fish!</string>
+    <string name="fish_information">Fish Information</string>
+    <string name="type_of_fish">Type of Fish</string>
+    <string name="fish_length">Fish length</string>
+    <string name="fish_weight">Fish Weight</string>
+    <string name="enter_fish_information">Enter Fish Information</string>
 </resources>

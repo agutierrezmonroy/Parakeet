@@ -1,15 +1,18 @@
 package com.example.parakeet.Parakeet_Database.Entities;
 
-import com.example.parakeet.Parakeet_Database.Database;
+import com.example.parakeet.Parakeet_Database.FishDatabase;
+
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.util.Objects;
 
-@Entity(tableName = Database.PARAKEET_TABLE)
+@Entity(tableName = FishDatabase.PARAKEET_TABLE)
 public class User {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    @ColumnInfo(name = "user_id")
+    private int userid;
 
     private String username;
     private String password;
@@ -24,20 +27,20 @@ public class User {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id && is_admin == user.is_admin && Objects.equals(username, user.username) && Objects.equals(password, user.password);
+        return userid == user.userid && is_admin == user.is_admin && Objects.equals(username, user.username) && Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, is_admin);
+        return Objects.hash(userid, username, password, is_admin);
     }
 
-    public int getId() {
-        return id;
+    public int getUserid() {
+        return userid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserid(int userid) {
+        this.userid = userid;
     }
 
     public String getUsername() {
