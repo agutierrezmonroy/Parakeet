@@ -11,12 +11,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.LiveData;
 
+import com.example.parakeet.Parakeet_Database.Entities.User;
+import com.example.parakeet.Parakeet_Database.Repository;
 import com.example.parakeet.databinding.ActivityLandingPageBinding;
 
 public class LandingPageActivity extends AppCompatActivity {
     private static final String ADMIN_KEY = "com.example.parakeet.admin";
     private static final String USERNAME_KEY = "com.example.parakeet.username";
+    private Repository repository;
 
 
     @Override
@@ -24,32 +28,41 @@ public class LandingPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityLandingPageBinding binding = ActivityLandingPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        repository = Repository.getRepository(getApplication());
 
-        boolean isAdmin = getIntent().getBooleanExtra(ADMIN_KEY, false);
-        if (isAdmin) binding.adminButton.setVisibility(View.VISIBLE);
         String username = getIntent().getStringExtra(USERNAME_KEY);
+        LiveData<User> userObserver = repository.getUserByUsername(username);
+        userObserver.observe(this, user -> {
+            if(user.isIs_admin()){
+                binding.adminButton.setVisibility(View.VISIBLE);
+            }
 
-        binding.usernameText.setText(getString(R.string.welcome, username));
+            binding.usernameText.setText(getString(R.string.welcome, user.getUsername()));
 
-        binding.generalInfoButton.setOnClickListener(v -> {
-            Intent intent = GeneralInfoActivity.generalInfoActivityIntentFactory(LandingPageActivity.this, isAdmin, username);
-            startActivity(intent);
-        });
+            binding.generalInfoButton.setOnClickListener(v -> {
+                Intent intent = GeneralInfoActivity.generalInfoActivityIntentFactory(LandingPageActivity.this, username);
+                startActivity(intent);
+            });
 
-        binding.locationButton.setOnClickListener(v ->{
-            Intent intent = LocationActivity.locationActivityIntentFactory(LandingPageActivity.this, isAdmin, username);
-            startActivity(intent);
-        });
+            binding.locationButton.setOnClickListener(v ->{
+                Intent intent = LocationActivity.locationActivityIntentFactory(LandingPageActivity.this, username);
+                startActivity(intent);
+            });
 
-        binding.logOutButton.setOnClickListener(v -> {
-            Intent intent = LoginActivity.loginActivityIntentFactory(LandingPageActivity.this);
-            startActivity(intent);
+            binding.caughtInfoButton.setOnClickListener(v -> {
+                Intent intent = FishInformationActivity.fishInformationActivityIntentFactory(LandingPageActivity.this, username);
+                startActivity(intent);
+            });
+
+            binding.logOutButton.setOnClickListener(v -> {
+                Intent intent = LoginActivity.loginActivityIntentFactory(LandingPageActivity.this);
+                startActivity(intent);
+            });
         });
     }
 
-    static Intent landingPageActivityIntentFactory(Context context, Boolean isAdmin, String username) {
+    static Intent landingPageActivityIntentFactory(Context context, String username) {
         Intent intent = new Intent(context, LandingPageActivity.class);
-        intent.putExtra(ADMIN_KEY, isAdmin);
         intent.putExtra(USERNAME_KEY, username);
         return intent;
     }

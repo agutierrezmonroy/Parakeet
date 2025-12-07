@@ -3,6 +3,9 @@ package com.example.parakeet.Parakeet_Database;
 import android.app.Application;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+
+import com.example.parakeet.MainActivity;
 import com.example.parakeet.Parakeet_Database.Entities.User;
 
 import java.util.concurrent.ExecutionException;
@@ -30,23 +33,14 @@ public class Repository {
         try {
             return future.get();
         } catch (InterruptedException | ExecutionException e) {
-            Log.d("TKl", "Problem getting Repository, thread error.");
+            Log.d(MainActivity.TAG, "Problem getting Repository, thread error.");
         }
 
         return null;
     }
 
-    public User getUserByUsername(String username) {
-        Future<User> future = FishDatabase.databaseWriteExecutor.submit(
-                () -> userDAO.getUserByUsername(username));
-
-        try {
-             return future.get();
-        } catch (InterruptedException | ExecutionException e) {
-            Log.i("TKL", "Problem when getting user by username");
-        }
-        return null;
-
+    public LiveData<User> getUserByUsername(String username) {
+        return userDAO.getUserByUsername(username);
     }
 
 

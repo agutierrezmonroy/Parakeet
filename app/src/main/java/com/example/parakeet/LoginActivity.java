@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.LiveData;
 
 import com.example.parakeet.Parakeet_Database.Entities.User;
 import com.example.parakeet.Parakeet_Database.Repository;
@@ -35,10 +36,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         binding.loginButton.setOnClickListener(v -> {
-            if (verifyUser()) {
-                Intent intent = LandingPageActivity.landingPageActivityIntentFactory(LoginActivity.this, isAdmin, user.getUsername());
-                startActivity(intent);
-            }
+            verifyUser();
         });
 
         binding.returnButton.setOnClickListener(v -> {
@@ -47,29 +45,29 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private boolean verifyUser(){
+    private void verifyUser(){
         String username = binding.usernameEditText.getText().toString();
         if (username.isEmpty()){
             toastMaker("Username may not be blank.");
-            return false;
+            return;
         }
-        user = repository.getUserByUsername(username);
-        if (user != null){
-            String password = binding.passwordEditText.getText().toString();
-            if (password.equals(user.getPassword())){
-                isAdmin = user.isIs_admin();
-                return true;
-            } else {
-                toastMaker("Invalid Password");
-                return false;
+        LiveData<User> userObeserver = repository.getUserByUsername(username);
+        userObeserver.observe(this, user ->{
+            if (user != null) {
+                String password = binding.passwordEditText.getText().toString();
+                if (password.equals(user.getPassword())){
+                    startActivity(LandingPageActivity.landingPageActivityIntentFactory(getApplicationContext(), user.getUsername()));
+                }
+                else {
+                    toastMaker("Invalid Password");
+                }
             }
-        }
 
-        toastMaker(String.format("No %s found",
-                username));
-
-        return false;
-
+            else {
+                toastMaker(String.format("%s is not a valid username", username));
+            }
+            userObeserver.removeObservers(this);
+        });
     }
 
     private void toastMaker(String message) {

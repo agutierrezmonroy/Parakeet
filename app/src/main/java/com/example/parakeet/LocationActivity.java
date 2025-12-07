@@ -24,14 +24,17 @@ public class LocationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityLocationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        boolean isAdmin = getIntent().getBooleanExtra(ADMIN_KEY, false);
         String username = getIntent().getStringExtra(USERNAME_KEY);
+
+        binding.setLocationButton.setOnClickListener(v -> {
+            Intent intent = LocationFoundActivity.locationFoundActivityIntentFactory(LocationActivity.this, username);
+            startActivity(intent);
+        });
     }
 
 
-    static Intent locationActivityIntentFactory(Context context, Boolean isAdmin, String username) {
+    static Intent locationActivityIntentFactory(Context context, String username) {
         Intent intent = new Intent(context, LocationActivity.class);
-        intent.putExtra(ADMIN_KEY, isAdmin);
         intent.putExtra(USERNAME_KEY, username);
         return intent;
     }

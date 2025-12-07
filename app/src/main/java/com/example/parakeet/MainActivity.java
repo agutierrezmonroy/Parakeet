@@ -17,6 +17,8 @@ import com.example.parakeet.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String TAG = "Para_Keet";
+
     private Repository repository;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
