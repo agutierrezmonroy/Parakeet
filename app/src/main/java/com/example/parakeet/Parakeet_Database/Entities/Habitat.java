@@ -7,24 +7,34 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import com.example.parakeet.Parakeet_Database.FishDatabase;
+
 import java.util.Objects;
 
-@Entity(tableName = "Habitat")
+@Entity(tableName = FishDatabase.HABITAT_TABLE)
 public class Habitat {
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "Habitat_id")
-    private int Habitat_id;
+    @ColumnInfo(name = "habitat_id")
+    private int habitat_id;
 
+    private String name;
+
+    private String region;
     private String desc;
     private String warnings;
     private String Favorite_Location;
 
-    public int getHab_id() {
-        return Habitat_id;
+    public Habitat(String name, String region){
+        this.name = name;
+        this.region = region;
     }
 
-    public void setHab_id(int habitat_id) {
-        Habitat_id = habitat_id;
+    public int getHabitat_id() {
+        return habitat_id;
+    }
+
+    public void setHabitat_id(int habitat_id) {
+        habitat_id = habitat_id;
     }
 
     public String getDesc() {
@@ -51,15 +61,31 @@ public class Habitat {
         Favorite_Location = favorite_Location;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Habitat habitat = (Habitat) o;
-        return Habitat_id == habitat.Habitat_id && Objects.equals(desc, habitat.desc) && Objects.equals(warnings, habitat.warnings) && Objects.equals(Favorite_Location, habitat.Favorite_Location);
+        return habitat_id == habitat.habitat_id && Objects.equals(desc, habitat.desc) && Objects.equals(warnings, habitat.warnings) && Objects.equals(Favorite_Location, habitat.Favorite_Location);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Habitat_id, desc, warnings, Favorite_Location);
+        return Objects.hash(habitat_id, desc, warnings, Favorite_Location);
     }
 }

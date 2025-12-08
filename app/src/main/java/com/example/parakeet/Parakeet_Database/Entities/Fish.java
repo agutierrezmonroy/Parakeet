@@ -5,9 +5,12 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import com.example.parakeet.Parakeet_Database.FishDatabase;
+import com.example.parakeet.Parakeet_Database.Repository;
+
 import java.util.Objects;
 
-@Entity(tableName = "Fish",
+@Entity(tableName = FishDatabase.FISH_TABLE,
         foreignKeys = {
                 @ForeignKey(
                         entity = User.class,
@@ -41,6 +44,13 @@ public class Fish {
     private String bait;
     private String discovery;
     private boolean edible;
+
+    public Fish(){}
+    public Fish(double length, double weight, boolean edible){
+        this.length = length;
+        this.weight = weight;
+        this.edible = edible;
+    }
 
 
     public int getFish_id() {
