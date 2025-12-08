@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
             if (user != null) {
                 String password = binding.passwordEditText.getText().toString();
                 if (password.equals(user.getPassword())){
-                    startActivity(LandingPageActivity.landingPageActivityIntentFactory(getApplicationContext(), user.getUsername()));
+                    startActivity(LandingPageActivity.landingPageActivityIntentFactory(LoginActivity.this, username));
                 }
                 else {
                     toastMaker("Invalid Password");
@@ -105,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
                 repository.insertUser(newUser);
 
                 toastMaker("Account created! Logging you in...");
-                startActivity(LandingPageActivity.landingPageActivityIntentFactory(getApplicationContext(), username));
+                startActivity(LandingPageActivity.landingPageActivityIntentFactory(LoginActivity.this, username));
             }
             userObserver.removeObservers(this);
         });
