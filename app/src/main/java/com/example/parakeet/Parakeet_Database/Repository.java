@@ -4,9 +4,13 @@ import android.app.Application;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
+import java.util.List;
 
 import com.example.parakeet.MainActivity;
+import com.example.parakeet.Parakeet_Database.Entities.Habitat;
 import com.example.parakeet.Parakeet_Database.Entities.User;
+import com.example.parakeet.Parakeet_Database.Entities.Fish;
+
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -14,12 +18,17 @@ import java.util.concurrent.Future;
 public class Repository {
 
     private final UserDAO userDAO;
+
+    private final FishDAO fishDAO;
+    private final HabitatDAO habitatDAO;
     private static Repository repository;
 
     private Repository(Application application) {
         FishDatabase db = FishDatabase.getDatabase(application);
 
         this.userDAO = db.userDAO();
+        this.fishDAO = db.fishDAO();
+        this.habitatDAO = db.habitatDAO();
     }
 
     public static Repository getRepository(Application application) {
@@ -51,4 +60,23 @@ public class Repository {
 
     }
 
+    public void insertFish(Fish... fish) {
+        FishDatabase.databaseWriteExecutor.execute(() ->
+                fishDAO.insert(fish));
+
+    }
+
+    public LiveData<List<Fish>>getAllFish(){
+        return fishDAO.getAllFish();
+    }
+
+    public void insertHabitat(Habitat... habitats) {
+        FishDatabase.databaseWriteExecutor.execute(() ->
+                habitatDAO.insert(habitats));
+
+    }
+
+    public LiveData<List<Habitat>>getAllHabitats(){
+        return habitatDAO.getAllHabitats();
+    }
 }

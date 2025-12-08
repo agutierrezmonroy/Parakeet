@@ -4,11 +4,16 @@ import com.example.parakeet.Parakeet_Database.FishDatabase;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import java.util.Objects;
 
-@Entity(tableName = FishDatabase.PARAKEET_TABLE)
+@Entity(
+        tableName = FishDatabase.USER_TABLE,
+        indices = {@Index(value = "username", unique = true)}
+        )
+
 public class User {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "user_id")
@@ -59,7 +64,7 @@ public class User {
         this.password = password;
     }
 
-    public boolean isIs_admin() {
+    public boolean isIs_admin( ) {
         return is_admin;
     }
 

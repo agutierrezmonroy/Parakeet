@@ -13,9 +13,9 @@ public interface UserDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(User... user);
 
-    @Query("DELETE FROM " + FishDatabase.PARAKEET_TABLE)
+    @Query("DELETE FROM " + FishDatabase.USER_TABLE)
     void deleteAll();
 
-    @Query("SELECT * from " + FishDatabase.PARAKEET_TABLE + " WHERE username == :username")
+    @Query("SELECT * from " + FishDatabase.USER_TABLE + " WHERE username == :username")
     LiveData<User> getUserByUsername(String username);
 }
