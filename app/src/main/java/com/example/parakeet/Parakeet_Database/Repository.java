@@ -13,6 +13,7 @@ import com.example.parakeet.Parakeet_Database.Entities.Fish;
 
 
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
 import java.util.concurrent.Future;
 
 public class Repository {
@@ -21,10 +22,15 @@ public class Repository {
 
     private final FishDAO fishDAO;
     private final HabitatDAO habitatDAO;
+
+    private final FishDatabase db;
     private static Repository repository;
 
+    public static Executor databaseExecutor = FishDatabase.databaseWriteExecutor;
+
+
     private Repository(Application application) {
-        FishDatabase db = FishDatabase.getDatabase(application);
+        db = FishDatabase.getDatabase(application);
 
         this.userDAO = db.userDAO();
         this.fishDAO = db.fishDAO();
@@ -53,15 +59,30 @@ public class Repository {
     }
 
 
+    public void insertUHF(User user, Habitat habitat, Fish fishA, Fish fishB){
+        databaseExecutor.execute(() -> {
+           db.runInTransaction(() -> {
+               long userId = userDAO.insert(user);
+               long habitatId = habitatDAO.insert(habitat)[0];
+
+               fishA.setFishUserId((int) userId);
+               fishA.setHabitat_id(habitatId);
+               fishB.setFishUserId((int) userId);
+               fishB.setHabitat_id(habitatId);
+
+               fishDAO.insert(fishA, fishB);
+           });
+        });
+    }
 
     public void insertUser(User... user) {
-        FishDatabase.databaseWriteExecutor.execute(() ->
+        databaseExecutor.execute(() ->
              userDAO.insert(user));
 
     }
 
     public void insertFish(Fish... fish) {
-        FishDatabase.databaseWriteExecutor.execute(() ->
+        databaseExecutor.execute(() ->
                 fishDAO.insert(fish));
 
     }
@@ -71,9 +92,9 @@ public class Repository {
     }
 
     public void insertHabitat(Habitat... habitats) {
-        FishDatabase.databaseWriteExecutor.execute(() ->
-                habitatDAO.insert(habitats));
-
+        databaseExecutor.execute(() -> {
+                habitatDAO.insert(habitats) ;
+        });
     }
 
     public LiveData<List<Habitat>>getAllHabitats(){

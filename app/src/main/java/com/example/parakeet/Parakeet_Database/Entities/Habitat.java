@@ -14,8 +14,8 @@ import java.util.Objects;
 @Entity(tableName = FishDatabase.HABITAT_TABLE)
 public class Habitat {
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "habitat_id")
-    private int habitat_id;
+    @ColumnInfo(name = "habitatId")
+    private long habitatId;
 
     private String name;
 
@@ -29,12 +29,12 @@ public class Habitat {
         this.region = region;
     }
 
-    public int getHabitat_id() {
-        return habitat_id;
+    public long getHabitatId() {
+        return habitatId;
     }
 
-    public void setHabitat_id(int habitat_id) {
-        habitat_id = habitat_id;
+    public void setHabitatId(long habitatId) {
+        this.habitatId = habitatId;
     }
 
     public String getDesc() {
@@ -81,11 +81,11 @@ public class Habitat {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Habitat habitat = (Habitat) o;
-        return habitat_id == habitat.habitat_id && Objects.equals(desc, habitat.desc) && Objects.equals(warnings, habitat.warnings) && Objects.equals(Favorite_Location, habitat.Favorite_Location);
+        return habitatId == habitat.habitatId && Objects.equals(desc, habitat.desc) && Objects.equals(warnings, habitat.warnings) && Objects.equals(Favorite_Location, habitat.Favorite_Location);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(habitat_id, desc, warnings, Favorite_Location);
+        return Objects.hash(habitatId, desc, warnings, Favorite_Location);
     }
 }

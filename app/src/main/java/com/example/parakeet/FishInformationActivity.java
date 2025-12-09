@@ -21,7 +21,8 @@ public class FishInformationActivity extends AppCompatActivity {
 
     ActivityFishInformationBinding binding;
     private static final String USERNAME_KEY = "com.example.parakeet.username";
-
+    private static final String HABITAT_ID_KEY = ".com.example.parakeet.habitat_id";
+    private static final String SPECIES_NAME_KEY = ".com.example.parakeet.species";
     private Repository repository;
 
     @Override
@@ -31,6 +32,8 @@ public class FishInformationActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         String username = getIntent().getStringExtra(USERNAME_KEY);
+        long habitatId = getIntent().getLongExtra(HABITAT_ID_KEY, -1);
+       String species = getIntent().getStringExtra(SPECIES_NAME_KEY);
         repository = Repository.getRepository(getApplication());
 
 
@@ -46,7 +49,7 @@ public class FishInformationActivity extends AppCompatActivity {
             double length = Double.parseDouble(lengthStr);
             double weight = Double.parseDouble(weightStr);
 
-            Fish fish = new Fish(length, weight, true);
+            Fish fish = new Fish(species, length, weight, true, habitatId);
             repository.insertFish(fish);
             Toast.makeText(this, "Fish logged", Toast.LENGTH_SHORT).show();
         });

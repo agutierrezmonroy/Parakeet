@@ -14,7 +14,7 @@ import java.util.List;
 public interface FishDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Fish... fish);
+    long[] insert(Fish... fish);
 
     @Query("DELETE FROM " + FishDatabase.FISH_TABLE)
     void deleteAll();

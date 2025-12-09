@@ -20,8 +20,8 @@ import java.util.Objects;
                 ),
                 @ForeignKey(
                         entity = Habitat.class,
-                        parentColumns = "habitat_id",
-                        childColumns = "fish_habitat_id",
+                        parentColumns = "habitatId",
+                        childColumns = "habitat_id",
                         onDelete = ForeignKey.SET_NULL
                 )
         }
@@ -29,14 +29,14 @@ import java.util.Objects;
 public class Fish {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "Fish_id")
-    private int Fish_id;
+    private long Fish_id;
 
     @ColumnInfo(name = "fish_user_id", index = true)
     private int fishUserId;
 
 
-    @ColumnInfo(name = "fish_habitat_id", index = true)
-    private Integer fishHabitatId;
+    @ColumnInfo(name = "habitat_id", index = true)
+    private long habitat_id;
 
     private String species;
     private double weight;
@@ -46,18 +46,20 @@ public class Fish {
     private boolean edible;
 
     public Fish(){}
-    public Fish(double length, double weight, boolean edible){
+    public Fish(String species, double length, double weight, boolean edible, long habitat_id){
+        this.species = species;
         this.length = length;
         this.weight = weight;
         this.edible = edible;
+        this.habitat_id = habitat_id;
     }
 
 
-    public int getFish_id() {
+    public long getFish_id() {
         return Fish_id;
     }
 
-    public void setFish_id(int fish_id) {
+    public void setFish_id(long fish_id) {
         Fish_id = fish_id;
     }
 
@@ -117,24 +119,32 @@ public class Fish {
         this.fishUserId = fishUserId;
     }
 
-    public Integer getFishHabitatId() {
-        return fishHabitatId;
+    public long getHabitat_id() {
+        return habitat_id;
     }
 
-    public void setFishHabitatId(Integer fishHabitatId) {
-        this.fishHabitatId = fishHabitatId;
+    public void setHabitat_id(long habitat_id) {
+        this.habitat_id = habitat_id;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Fish fish = (Fish) o;
-        return Fish_id == fish.Fish_id && fishUserId == fish.fishUserId && Double.compare(weight, fish.weight) == 0 && Double.compare(length, fish.length) == 0 && edible == fish.edible && Objects.equals(fishHabitatId, fish.fishHabitatId) && Objects.equals(species, fish.species) && Objects.equals(bait, fish.bait) && Objects.equals(discovery, fish.discovery);
+        return Fish_id == fish.Fish_id &&
+                fishUserId == fish.fishUserId &&
+                habitat_id == fish.fishUserId &&
+                Double.compare(weight, fish.weight) == 0 &&
+                Double.compare(length, fish.length) == 0 &&
+                edible == fish.edible &&
+                Objects.equals(species, fish.species) &&
+                Objects.equals(bait, fish.bait) &&
+                Objects.equals(discovery, fish.discovery);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Fish_id, fishUserId, fishHabitatId, species, weight, length, bait, discovery, edible);
+        return Objects.hash(Fish_id, fishUserId, habitat_id, species, weight, length, bait, discovery, edible);
     }
 }
 
