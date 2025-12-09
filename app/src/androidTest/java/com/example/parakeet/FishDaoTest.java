@@ -92,7 +92,6 @@ public class FishDaoTest {
         long[] habitatIds = habitatDao.insert(habitat);
         long habitatId = habitatIds[0];
 
-        // 3) Insert two fish linked to both user and habitat
         Fish fish1 = new Fish("Fish1", 1.0, 1.0, true, habitatId);
         fish1.setFishUserId(userId);
 
