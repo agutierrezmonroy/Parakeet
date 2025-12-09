@@ -17,7 +17,7 @@ import java.util.Objects;
 public class User {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "user_id")
-    private int userid;
+    private long userid;
 
     private String username;
     private String password;
@@ -40,11 +40,11 @@ public class User {
         return Objects.hash(userid, username, password, is_admin);
     }
 
-    public int getUserid() {
+    public long getUserid() {
         return userid;
     }
 
-    public void setUserid(int userid) {
+    public void setUserid(long userid) {
         this.userid = userid;
     }
 

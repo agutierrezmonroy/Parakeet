@@ -22,6 +22,7 @@ public class Repository {
 
     private final FishDAO fishDAO;
     private final HabitatDAO habitatDAO;
+    private final UserFishHabitatDAO uhfDAO;
 
     private final FishDatabase db;
     private static Repository repository;
@@ -35,6 +36,7 @@ public class Repository {
         this.userDAO = db.userDAO();
         this.fishDAO = db.fishDAO();
         this.habitatDAO = db.habitatDAO();
+        this.uhfDAO = db.uhfDAO();
     }
 
     public static Repository getRepository(Application application) {
@@ -59,20 +61,10 @@ public class Repository {
     }
 
 
-    public void insertUHF(User user, Habitat habitat, Fish fishA, Fish fishB){
-        databaseExecutor.execute(() -> {
-           db.runInTransaction(() -> {
-               long userId = userDAO.insert(user);
-               long habitatId = habitatDAO.insert(habitat)[0];
-
-               fishA.setFishUserId((int) userId);
-               fishA.setHabitat_id(habitatId);
-               fishB.setFishUserId((int) userId);
-               fishB.setHabitat_id(habitatId);
-
-               fishDAO.insert(fishA, fishB);
-           });
-        });
+    public void insertUHF(User user, Habitat habitat, Fish fishA, Fish fishB) {
+        databaseExecutor.execute(() ->
+                uhfDAO.insertUHF(user, habitat, fishA, fishB)
+        );
     }
 
     public void insertUser(User... user) {
@@ -99,5 +91,9 @@ public class Repository {
 
     public LiveData<List<Habitat>>getAllHabitats(){
         return habitatDAO.getAllHabitats();
+    }
+
+    public LiveData<List<Habitat>>getHabitatById(long habitatId){
+        return habitatDAO.getHabitatByID(habitatId);
     }
 }

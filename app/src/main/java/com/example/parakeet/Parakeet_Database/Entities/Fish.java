@@ -32,7 +32,7 @@ public class Fish {
     private long Fish_id;
 
     @ColumnInfo(name = "fish_user_id", index = true)
-    private int fishUserId;
+    private long fishUserId;
 
 
     @ColumnInfo(name = "habitat_id", index = true)
@@ -111,11 +111,11 @@ public class Fish {
         this.edible = edible;
     }
 
-    public int getFishUserId() {
+    public long getFishUserId() {
         return fishUserId;
     }
 
-    public void setFishUserId(int fishUserId) {
+    public void setFishUserId(long fishUserId) {
         this.fishUserId = fishUserId;
     }
 
@@ -133,7 +133,7 @@ public class Fish {
         Fish fish = (Fish) o;
         return Fish_id == fish.Fish_id &&
                 fishUserId == fish.fishUserId &&
-                habitat_id == fish.fishUserId &&
+                habitat_id == fish.habitat_id &&
                 Double.compare(weight, fish.weight) == 0 &&
                 Double.compare(length, fish.length) == 0 &&
                 edible == fish.edible &&

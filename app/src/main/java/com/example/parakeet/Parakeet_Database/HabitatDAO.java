@@ -21,4 +21,7 @@ public interface HabitatDAO {
 
     @Query("SELECT * from " + FishDatabase.HABITAT_TABLE)
     LiveData<List<Habitat>> getAllHabitats();
+
+    @Query("SELECT * from " + FishDatabase.HABITAT_TABLE + " WHERE habitatId == :habitatId")
+    LiveData<List<Habitat>> getHabitatByID(long habitatId);
 }

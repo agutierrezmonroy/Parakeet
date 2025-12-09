@@ -22,4 +22,5 @@ public interface UserDAO {
 
     @Query("SELECT * from " + FishDatabase.USER_TABLE + " WHERE username == :username")
     LiveData<User> getUserByUsername(String username);
+
 }

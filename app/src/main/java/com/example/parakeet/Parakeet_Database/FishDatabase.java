@@ -21,7 +21,7 @@ import java.util.concurrent.Executors;
 
 @Database(
         entities = {User.class, Fish.class, Habitat.class},
-        version = 3,
+        version = 4,
         exportSchema = false
 )
 public abstract class FishDatabase extends RoomDatabase {
@@ -77,5 +77,6 @@ public abstract class FishDatabase extends RoomDatabase {
     public abstract UserDAO userDAO();
     public abstract FishDAO fishDAO();
     public abstract HabitatDAO habitatDAO();
+    public abstract UserFishHabitatDAO uhfDAO();
 }
 
