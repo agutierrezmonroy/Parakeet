@@ -46,6 +46,9 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
+    val fragment_version = "1.8.9"
+    implementation("androidx.fragment:fragment:${fragment_version}")
+
     val room_version = "2.8.4"
 
     implementation("androidx.room:room-runtime:$room_version")
