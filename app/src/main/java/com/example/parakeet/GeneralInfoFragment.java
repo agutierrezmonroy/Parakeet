@@ -8,9 +8,12 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
+import com.example.parakeet.Parakeet_Database.Repository;
+import com.example.parakeet.Parakeet_Database.viewHolders.FishAdapter;
 import com.example.parakeet.databinding.FragmentGeneralInfoBinding;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 
 public class GeneralInfoFragment extends Fragment {
@@ -18,6 +21,7 @@ public class GeneralInfoFragment extends Fragment {
     private static final String USERNAME_KEY = "username";
 
     private FragmentGeneralInfoBinding binding;
+    private Repository repository;
     private String username;
 
     public static GeneralInfoFragment newInstance(String username) {
@@ -29,10 +33,11 @@ public class GeneralInfoFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentGeneralInfoBinding.inflate(inflater, container, false);
+        FishAdapter adapter = new FishAdapter();
+        binding.fishRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        binding.fishRecyclerView.setAdapter(adapter);
         return binding.getRoot();
     }
 
@@ -43,6 +48,24 @@ public class GeneralInfoFragment extends Fragment {
         if (getArguments() != null) {
             username = getArguments().getString(USERNAME_KEY);
         }
+
+        repository = Repository.getRepository(requireActivity().getApplication());
+
+        assert repository != null;
+        repository.getUserByUsername(username)
+                .observe(getViewLifecycleOwner(), user -> {
+                    if (user == null) return;
+
+                    int userId = user.getUserid();
+
+                    repository.getAllFishByUserId(userId)
+                            .observe(getViewLifecycleOwner(), fishList -> {
+                                assert binding.fishRecyclerView.getAdapter() != null;
+                                ((FishAdapter) binding.fishRecyclerView.getAdapter())
+                                        .submitList(fishList);
+                            });
+                });
+
 
         binding.giReturnToHubButton.setOnClickListener(v -> {
             Intent intent = LandingPageActivity.landingPageActivityIntentFactory(requireContext(), username);

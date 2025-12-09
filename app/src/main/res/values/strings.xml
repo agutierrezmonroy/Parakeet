@@ -28,4 +28,11 @@
     <string name="fish_length">Fish length</string>
     <string name="fish_weight">Fish Weight</string>
     <string name="enter_fish_information">Enter Fish Information</string>
+    <string name="species">Species</string>
+    <string name="length_0_0">Length: 0.0</string>
+    <string name="weight_0_0">Weight: 0.0</string>
+    <string name="bait">Bait: -</string>
+    <string name="discovery">Discovery: -</string>
+    <string name="edible_yes_no">Edible: Yes/No</string>
+    <string name="fish_summary">Fish summary</string>
 </resources>

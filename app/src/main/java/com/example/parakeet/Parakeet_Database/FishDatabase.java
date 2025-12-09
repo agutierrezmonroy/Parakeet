@@ -28,8 +28,8 @@ public abstract class FishDatabase extends RoomDatabase {
 
     private static final String DATABASE_NAME = "ParakeetDatabase";
 
-    public static final String USER_TABLE    = "user_table";
-    public static final String FISH_TABLE    = "fish_table";
+    public static final String USER_TABLE = "user_table";
+    public static final String FISH_TABLE  = "fish_table";
     public static final String HABITAT_TABLE = "habitat_table";
 
 
