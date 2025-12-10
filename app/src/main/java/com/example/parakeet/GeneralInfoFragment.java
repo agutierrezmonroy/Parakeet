@@ -62,9 +62,7 @@ public class GeneralInfoFragment extends Fragment {
         repository.getUserByUsername(username)
                 .observe(getViewLifecycleOwner(), user -> {
                     if (user == null) return;
-
                     long userId = user.getUserid();
-
                     repository.getAllFishByUserId(userId)
                             .observe(getViewLifecycleOwner(), adapter::submitList);
                 });

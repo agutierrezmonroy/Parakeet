@@ -67,9 +67,7 @@ public class FishInformationFragment extends Fragment {
                         String weightStr = binding.fishWeightEditText.getText().toString().trim();
                         String habitatName = binding.habitatNameEditText.getText().toString().trim();
 
-                        String habitatRegion = binding.habitatRegionEditText != null
-                                ? binding.habitatRegionEditText.getText().toString().trim()
-                                : "Unknown";
+                        String habitatRegion = binding.habitatRegionEditText.getText().toString().trim();
 
                         if (species.isEmpty() || lengthStr.isEmpty() || weightStr.isEmpty() || habitatName.isEmpty()) {
                             Toast.makeText(requireContext(),
@@ -107,9 +105,7 @@ public class FishInformationFragment extends Fragment {
                         binding.fishLengthEditText.setText("");
                         binding.fishWeightEditText.setText("");
                         binding.habitatNameEditText.setText("");
-                        if (binding.habitatRegionEditText != null) {
-                            binding.habitatRegionEditText.setText("");
-                        }
+                        binding.habitatRegionEditText.setText("");
                     });
                 });
 
