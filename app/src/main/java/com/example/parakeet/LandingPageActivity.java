@@ -37,8 +37,6 @@ public class LandingPageActivity extends AppCompatActivity {
         binding.generalInfoButton.setOnClickListener(v ->
                 showFragment(GeneralInfoFragment.newInstance(username)));
 
-        binding.locationButton.setOnClickListener(v ->
-                showFragment(LocationFragment.newInstance(username)));
 
         binding.caughtInfoButton.setOnClickListener(v ->
                 showFragment(FishInformationFragment.newInstance(username)));
