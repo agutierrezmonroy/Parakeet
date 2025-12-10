@@ -46,6 +46,10 @@ public class LandingPageActivity extends AppCompatActivity {
 
             if(user.isIs_admin()){
                 binding.adminButton.setVisibility(View.VISIBLE);
+                binding.adminButton.setOnClickListener(v -> {
+                    Intent intent = AdminPageActivity.adminPageActivityIntentFactory(LandingPageActivity.this, username);
+                    startActivity(intent);
+                });
             }
 
             binding.usernameText.setText(getString(R.string.welcome, user.getUsername()));
