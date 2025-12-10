@@ -56,6 +56,16 @@ public class Repository {
         return null;
     }
 
+    public long insertHabitatSync(Habitat habitat) {
+        Future<Long> future = FishDatabase.databaseWriteExecutor.submit(
+                () -> habitatDAO.insert(habitat)[0]);
+        try {
+            return future.get();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public LiveData<User> getUserByUsername(String username) {
         return userDAO.getUserByUsername(username);
     }

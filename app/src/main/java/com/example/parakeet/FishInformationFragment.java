@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.parakeet.Parakeet_Database.Entities.Fish;
+import com.example.parakeet.Parakeet_Database.Entities.Habitat;
 import com.example.parakeet.Parakeet_Database.Repository;
 import com.example.parakeet.databinding.FragmentFishInformationBinding;
 
@@ -20,7 +21,7 @@ public class FishInformationFragment extends Fragment {
     private static final String USERNAME_KEY = "username";
 
     private FragmentFishInformationBinding binding;
-    Repository repository;
+    private Repository repository;
     private String username;
 
     public static FishInformationFragment newInstance(String username) {
@@ -32,7 +33,9 @@ public class FishInformationFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container,
+                             Bundle savedInstanceState) {
         binding = FragmentFishInformationBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -47,23 +50,85 @@ public class FishInformationFragment extends Fragment {
 
         repository = Repository.getRepository(requireActivity().getApplication());
 
+        // 1) Get the current user so we know user_id for FK
+        repository.getUserByUsername(username)
+                .observe(getViewLifecycleOwner(), user -> {
+                    if (user == null) {
+                        Toast.makeText(requireContext(),
+                                "User not found. Please log in again.",
+                                Toast.LENGTH_SHORT).show();
+                        return;
+                    }
 
-        binding.logFishButton.setOnClickListener(v -> {
-            String lengthStr = binding.fishLengthEditText.getText().toString().trim();
-            String weightStr = binding.fishWeightEditText.getText().toString().trim();
+                    long userId = user.getUserid();
 
-            if(lengthStr.isEmpty() || weightStr.isEmpty()){
-                Toast.makeText(requireContext(), "Please enter length and weight", Toast.LENGTH_SHORT).show();
-                return;
-            }
+                    // 2) Wire up the button once we know the userId
+                    binding.logFishButton.setOnClickListener(v -> {
+                        String species = binding.fishSpeciesEditText.getText()
+                                .toString().trim();
+                        String lengthStr = binding.fishLengthEditText.getText()
+                                .toString().trim();
+                        String weightStr = binding.fishWeightEditText.getText()
+                                .toString().trim();
+                        String habitatName = binding.habitatNameEditText.getText()
+                                .toString().trim();
+                        // Optional region field, fall back to "Unknown" if you don't have it
+                        String habitatRegion = binding.habitatRegionEditText != null
+                                ? binding.habitatRegionEditText.getText().toString().trim()
+                                : "Unknown";
 
-            double length = Double.parseDouble(lengthStr);
-            double weight = Double.parseDouble(weightStr);
+                        // Basic validation
+                        if (species.isEmpty() ||
+                                lengthStr.isEmpty() ||
+                                weightStr.isEmpty() ||
+                                habitatName.isEmpty()) {
+                            Toast.makeText(requireContext(),
+                                    "Please enter species, length, weight, and habitat.",
+                                    Toast.LENGTH_SHORT).show();
+                            return;
+                        }
 
-            Fish fish = new Fish(length, weight, true);
-            repository.insertFish(fish);
-            Toast.makeText(requireContext(), "Fish logged", Toast.LENGTH_SHORT).show();
-        });
+                        double length;
+                        double weight;
+                        try {
+                            length = Double.parseDouble(lengthStr);
+                            weight = Double.parseDouble(weightStr);
+                        } catch (NumberFormatException e) {
+                            Toast.makeText(requireContext(),
+                                    "Length and weight must be numbers.",
+                                    Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        // 3) Create Habitat from user input and insert it
+                        Habitat habitat = new Habitat(habitatName, habitatRegion);
+
+                        // You need a repository method that returns the inserted ID.
+                        // Typical Repository wrapper around HabitatDAO.insert(...)
+                        long habitatId = repository.insertHabitatSync(habitat);
+
+                        // 4) Create Fish with species, length, weight, edible flag, and habitatId
+                        Fish fish = new Fish(species, length, weight, true, habitatId);
+                        fish.setFishUserId(userId);
+
+                        // 5) Insert fish via repository
+                        repository.insertFish(fish);
+
+                        Toast.makeText(requireContext(),
+                                "Fish logged",
+                                Toast.LENGTH_SHORT).show();
+
+                        // Optionally clear fields
+                        binding.fishSpeciesEditText.setText("");
+                        binding.fishLengthEditText.setText("");
+                        binding.fishWeightEditText.setText("");
+                        binding.habitatNameEditText.setText("");
+                        if (binding.habitatRegionEditText != null) {
+                            binding.habitatRegionEditText.setText("");
+                        }
+                    });
+                });
+
         binding.filocatiionReturnButton.setOnClickListener(v -> {
             Intent intent = LandingPageActivity.landingPageActivityIntentFactory(requireContext(), username);
             startActivity(intent);

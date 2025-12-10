@@ -1,80 +1,108 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#006892"
-    android:padding="16dp">
+    android:fillViewport="true"
+    android:background="#006892">
 
-    <TextView
-        android:id="@+id/generalInfoTitleTextView"
-        android:text="@string/fish_information"
-        android:textColor="@color/white"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        />
+        android:layout_height="wrap_content"
+        android:padding="16dp">
 
-    <EditText
-        android:id="@+id/fishLengthEditText"
-        android:inputType="numberDecimal"
-        android:hint="@string/fish_length"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        android:gravity="center"
-        android:autofillHints="Fish!"
-        android:textColorHint="@color/white"
-        />
+        <!-- Title -->
+        <TextView
+            android:id="@+id/generalInfoTitleTextView"
+            android:text="@string/fish_information"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp" />
 
-    <EditText
-        android:id="@+id/fishWeightEditText"
-        android:hint="@string/fish_weight"
-        android:layout_width="match_parent"
-        android:inputType="numberDecimal"
-        android:layout_height="100dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        android:gravity="center"
-        android:autofillHints="Fish!"
-        android:textColorHint="@color/white"
-        />
+        <!-- Species Input -->
+        <EditText
+            android:id="@+id/fishSpeciesEditText"
+            android:hint="@string/species"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords"
+            android:gravity="center"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:layout_marginBottom="15dp" />
 
-    <Button
-        android:id="@+id/logFishButton"
-        android:text="@string/enter_fish_information"
-        android:backgroundTint="@color/black"
-        android:layout_width="300dp"
-        android:textSize="20sp"
-        android:layout_height="100dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        />
+        <!-- Length Input -->
+        <EditText
+            android:id="@+id/fishLengthEditText"
+            android:hint="@string/fish_length"
+            android:inputType="numberDecimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:layout_marginBottom="15dp" />
 
-    <Button
-        android:id="@+id/filocatiionReturnButton"
-        android:text="@string/return_to_welcome_hub"
-        android:backgroundTint="@color/black"
-        android:layout_width="300dp"
-        android:textSize="20sp"
-        android:layout_height="100dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        />
+        <!-- Weight Input -->
+        <EditText
+            android:id="@+id/fishWeightEditText"
+            android:hint="@string/fish_weight"
+            android:inputType="numberDecimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:layout_marginBottom="15dp" />
 
+        <!-- Habitat Name -->
+        <EditText
+            android:id="@+id/habitatNameEditText"
+            android:hint="@string/habitat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:layout_marginBottom="15dp"
+            android:inputType="textCapWords" />
 
+        <!-- Habitat Region -->
+        <EditText
+            android:id="@+id/habitatRegionEditText"
+            android:hint="@string/habitat_region"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:layout_marginBottom="15dp"
+            android:inputType="textCapWords" />
 
-</LinearLayout>
+        <!-- Log Fish Button -->
+        <Button
+            android:id="@+id/logFishButton"
+            android:text="@string/enter_fish_information"
+            android:backgroundTint="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_marginBottom="15dp" />
+
+        <!-- Return Button -->
+        <Button
+            android:id="@+id/filocatiionReturnButton"
+            android:text="@string/return_to_welcome_hub"
+            android:backgroundTint="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_marginBottom="30dp" />
+
+    </LinearLayout>
+
+</ScrollView>
