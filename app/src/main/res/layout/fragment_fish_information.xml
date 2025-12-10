@@ -11,7 +11,6 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <!-- Title -->
         <TextView
             android:id="@+id/generalInfoTitleTextView"
             android:text="@string/fish_information"
@@ -23,7 +22,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp" />
 
-        <!-- Species Input -->
+
         <EditText
             android:id="@+id/fishSpeciesEditText"
             android:hint="@string/species"
@@ -35,7 +34,6 @@
             android:textColor="@color/white"
             android:layout_marginBottom="15dp" />
 
-        <!-- Length Input -->
         <EditText
             android:id="@+id/fishLengthEditText"
             android:hint="@string/fish_length"
@@ -47,7 +45,6 @@
             android:textColor="@color/white"
             android:layout_marginBottom="15dp" />
 
-        <!-- Weight Input -->
         <EditText
             android:id="@+id/fishWeightEditText"
             android:hint="@string/fish_weight"
@@ -59,7 +56,6 @@
             android:textColor="@color/white"
             android:layout_marginBottom="15dp" />
 
-        <!-- Habitat Name -->
         <EditText
             android:id="@+id/habitatNameEditText"
             android:hint="@string/habitat"
@@ -71,7 +67,7 @@
             android:layout_marginBottom="15dp"
             android:inputType="textCapWords" />
 
-        <!-- Habitat Region -->
+
         <EditText
             android:id="@+id/habitatRegionEditText"
             android:hint="@string/habitat_region"
@@ -83,7 +79,6 @@
             android:layout_marginBottom="15dp"
             android:inputType="textCapWords" />
 
-        <!-- Log Fish Button -->
         <Button
             android:id="@+id/logFishButton"
             android:text="@string/enter_fish_information"
@@ -93,7 +88,6 @@
             android:textSize="20sp"
             android:layout_marginBottom="15dp" />
 
-        <!-- Return Button -->
         <Button
             android:id="@+id/filocatiionReturnButton"
             android:text="@string/return_to_welcome_hub"
