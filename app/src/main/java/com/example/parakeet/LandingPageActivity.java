@@ -41,6 +41,11 @@ public class LandingPageActivity extends AppCompatActivity {
         binding.caughtInfoButton.setOnClickListener(v ->
                 showFragment(FishInformationFragment.newInstance(username)));
 
+        binding.logOutButton.setOnClickListener(v -> {
+            Intent intent = MainActivity.mainActivityIntentFactory(LandingPageActivity.this);
+            startActivity(intent);
+        });
+
         LiveData<User> userObserver = repository.getUserByUsername(username);
         userObserver.observe(this, user -> {
 
