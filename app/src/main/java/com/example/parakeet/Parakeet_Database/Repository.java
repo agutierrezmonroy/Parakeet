@@ -93,6 +93,10 @@ public class Repository {
         return fishDAO.getAllFish();
     }
 
+    public LiveData<List<Fish>> getAllFishByUserId(int userId) {
+        return fishDAO.getAllFishByUserId(userId);
+    }
+
     public void insertHabitat(Habitat... habitats) {
         databaseExecutor.execute(() -> {
                 habitatDAO.insert(habitats) ;

@@ -21,4 +21,7 @@ public interface FishDAO {
 
     @Query("SELECT * FROM " + FishDatabase.FISH_TABLE)
     LiveData<List<Fish>> getAllFish();
+
+    @Query("SELECT * FROM " + FishDatabase.FISH_TABLE + " WHERE fish_user_id = :userId")
+    LiveData<List<Fish>> getAllFishByUserId(int userId);
 }
