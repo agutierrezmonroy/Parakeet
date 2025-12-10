@@ -11,7 +11,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.parakeet.databinding.ActivityAdminPageBinding;
-import com.example.parakeet.databinding.ActivityGeneralInfoBinding;
 
 public class AdminPageActivity extends AppCompatActivity {
 
@@ -33,6 +32,8 @@ public class AdminPageActivity extends AppCompatActivity {
     }
 
     static Intent adminPageActivityIntentFactory(Context context, String username) {
-        return new Intent(context, AdminPageActivity.class);
+        Intent intent = new Intent(context, AdminPageActivity.class);
+        intent.putExtra(USERNAME_KEY, username);
+        return intent;
     }
 }
