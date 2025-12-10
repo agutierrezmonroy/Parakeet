@@ -50,7 +50,6 @@ public class FishInformationFragment extends Fragment {
 
         repository = Repository.getRepository(requireActivity().getApplication());
 
-        // 1) Get the current user so we know user_id for FK
         repository.getUserByUsername(username)
                 .observe(getViewLifecycleOwner(), user -> {
                     if (user == null) {
@@ -62,26 +61,17 @@ public class FishInformationFragment extends Fragment {
 
                     long userId = user.getUserid();
 
-                    // 2) Wire up the button once we know the userId
                     binding.logFishButton.setOnClickListener(v -> {
-                        String species = binding.fishSpeciesEditText.getText()
-                                .toString().trim();
-                        String lengthStr = binding.fishLengthEditText.getText()
-                                .toString().trim();
-                        String weightStr = binding.fishWeightEditText.getText()
-                                .toString().trim();
-                        String habitatName = binding.habitatNameEditText.getText()
-                                .toString().trim();
-                        // Optional region field, fall back to "Unknown" if you don't have it
+                        String species = binding.fishSpeciesEditText.getText().toString().trim();
+                        String lengthStr = binding.fishLengthEditText.getText().toString().trim();
+                        String weightStr = binding.fishWeightEditText.getText().toString().trim();
+                        String habitatName = binding.habitatNameEditText.getText().toString().trim();
+
                         String habitatRegion = binding.habitatRegionEditText != null
                                 ? binding.habitatRegionEditText.getText().toString().trim()
                                 : "Unknown";
 
-                        // Basic validation
-                        if (species.isEmpty() ||
-                                lengthStr.isEmpty() ||
-                                weightStr.isEmpty() ||
-                                habitatName.isEmpty()) {
+                        if (species.isEmpty() || lengthStr.isEmpty() || weightStr.isEmpty() || habitatName.isEmpty()) {
                             Toast.makeText(requireContext(),
                                     "Please enter species, length, weight, and habitat.",
                                     Toast.LENGTH_SHORT).show();
@@ -100,25 +90,19 @@ public class FishInformationFragment extends Fragment {
                             return;
                         }
 
-                        // 3) Create Habitat from user input and insert it
                         Habitat habitat = new Habitat(habitatName, habitatRegion);
 
-                        // You need a repository method that returns the inserted ID.
-                        // Typical Repository wrapper around HabitatDAO.insert(...)
                         long habitatId = repository.insertHabitatSync(habitat);
 
-                        // 4) Create Fish with species, length, weight, edible flag, and habitatId
                         Fish fish = new Fish(species, length, weight, true, habitatId);
                         fish.setFishUserId(userId);
 
-                        // 5) Insert fish via repository
                         repository.insertFish(fish);
 
                         Toast.makeText(requireContext(),
                                 "Fish logged",
                                 Toast.LENGTH_SHORT).show();
 
-                        // Optionally clear fields
                         binding.fishSpeciesEditText.setText("");
                         binding.fishLengthEditText.setText("");
                         binding.fishWeightEditText.setText("");

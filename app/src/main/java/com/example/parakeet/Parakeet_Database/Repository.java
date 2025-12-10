@@ -93,7 +93,7 @@ public class Repository {
         return fishDAO.getAllFish();
     }
 
-    public LiveData<List<Fish>> getAllFishByUserId(int userId) {
+    public LiveData<List<Fish>> getAllFishByUserId(long userId) {
         return fishDAO.getAllFishByUserId(userId);
     }
 

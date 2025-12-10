@@ -11,38 +11,30 @@ import com.example.parakeet.Parakeet_Database.Entities.Fish;
 
 import java.util.List;
 
+
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
+
+import com.example.parakeet.Parakeet_Database.Entities.Fish;
+import com.example.parakeet.Parakeet_Database.Entities.Habitat;
+import com.example.parakeet.Parakeet_Database.Repository;
+
+import java.util.List;
+
 public class FishAdapter extends ListAdapter<Fish, FishViewHolder> {
-    public FishAdapter() {
+
+    private final Repository repository;
+    private final LifecycleOwner lifecycleOwner;
+
+    public FishAdapter(Repository repository, LifecycleOwner lifecycleOwner) {
         super(new FishDiff());
+        this.repository = repository;
+        this.lifecycleOwner = lifecycleOwner;
     }
-
-    //Updating up the display
-
-    @Override
-    public void onBindViewHolder(@NonNull FishViewHolder holder,
-                                 int position) {
-        Fish fish = getItem(position);
-
-        String species   = safe(fish.getSpecies(),   "Unknown species");
-        String bait      = safe(fish.getBait(),      "-");
-        String discovery = safe(fish.getDiscovery(), "-");
-
-        String text = "Species: " + species
-                + " | Length: " + fish.getLength()
-                + " | Weight: " + fish.getWeight()
-                + " | Bait: " + bait
-                + " | Discovery: " + discovery
-                + " | Edible: " + (fish.isEdible() ? "Yes" : "No");
-
-        holder.bind(text);
-    }
-
-
-    //Making sure the data is safe to use
-    private String safe(String value, String fallback) {
-        return value != null ? value : fallback;
-    }
-
 
     @NonNull
     @Override
@@ -50,7 +42,41 @@ public class FishAdapter extends ListAdapter<Fish, FishViewHolder> {
         return FishViewHolder.create(parent);
     }
 
-    public static class FishDiff extends DiffUtil.ItemCallback<Fish> {
+    @Override
+    public void onBindViewHolder(@NonNull FishViewHolder holder, int position) {
+        Fish fish = getItem(position);
+
+        String fishText = "Species: " + safe(fish.getSpecies(), "Unknown species")
+                + " | Length: " + fish.getLength()
+                + " | Weight: " + fish.getWeight()
+                + " | Edible: " + (fish.isEdible() ? "Yes" : "No");
+
+        holder.bind(fishText);
+
+
+        repository.getHabitatById(fish.getHabitat_id())
+                .observe(lifecycleOwner, habitats -> {
+                    if (habitats == null || habitats.isEmpty()) {
+                        return;
+                    }
+                    Habitat habitat = habitats.get(0);
+
+                    String habitatName = safe(habitat.getName(), "Unknown habitat");
+                    String region = safe(habitat.getRegion(), "Unknown region");
+
+                    String fullText = fishText
+                            + " | Habitat: " + habitatName
+                            + " | Region: " + region;
+
+                    holder.bind(fullText);
+                });
+    }
+
+    private String safe(String value, String fallback) {
+        return value != null ? value : fallback;
+    }
+
+    static class FishDiff extends DiffUtil.ItemCallback<Fish> {
 
         @Override
         public boolean areItemsTheSame(@NonNull Fish oldItem, @NonNull Fish newItem) {
@@ -62,5 +88,4 @@ public class FishAdapter extends ListAdapter<Fish, FishViewHolder> {
             return oldItem.equals(newItem);
         }
     }
-
 }

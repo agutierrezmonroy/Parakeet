@@ -31,4 +31,5 @@
     <string name="species">Species</string>
     <string name="habitat">Habitat</string>
     <string name="habitat_region">region</string>
+    <string name="summary">Summary</string>
 </resources>
