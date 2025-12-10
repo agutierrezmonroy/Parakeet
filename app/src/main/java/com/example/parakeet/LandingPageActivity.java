@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 
 import com.example.parakeet.Parakeet_Database.Entities.User;
@@ -32,25 +33,13 @@ public class LandingPageActivity extends AppCompatActivity {
 
         String username = getIntent().getStringExtra(USERNAME_KEY);
 
-        binding.generalInfoButton.setOnClickListener(v -> {
-            Intent intent = GeneralInfoActivity.generalInfoActivityIntentFactory(LandingPageActivity.this, username);
-            startActivity(intent);
-        });
 
-        binding.locationButton.setOnClickListener(v -> {
-            Intent intent = LocationActivity.locationActivityIntentFactory(LandingPageActivity.this, username);
-            startActivity(intent);
-        });
+        binding.generalInfoButton.setOnClickListener(v ->
+                showFragment(GeneralInfoFragment.newInstance(username)));
 
-        binding.caughtInfoButton.setOnClickListener(v -> {
-            Intent intent = FishInformationActivity.fishInformationActivityIntentFactory(LandingPageActivity.this, username);
-            startActivity(intent);
-        });
 
-        binding.logOutButton.setOnClickListener(v -> {
-            Intent intent = LoginActivity.loginActivityIntentFactory(LandingPageActivity.this, false);
-            startActivity(intent);
-        });
+        binding.caughtInfoButton.setOnClickListener(v ->
+                showFragment(FishInformationFragment.newInstance(username)));
 
         LiveData<User> userObserver = repository.getUserByUsername(username);
         userObserver.observe(this, user -> {
@@ -72,5 +61,12 @@ public class LandingPageActivity extends AppCompatActivity {
         Intent intent = new Intent(context, LandingPageActivity.class);
         intent.putExtra(USERNAME_KEY, username);
         return intent;
+    }
+
+    private void showFragment(Fragment fragment) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit();
     }
 }

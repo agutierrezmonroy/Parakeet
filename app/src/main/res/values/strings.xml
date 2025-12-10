@@ -28,5 +28,9 @@
     <string name="fish_length">Fish length</string>
     <string name="fish_weight">Fish Weight</string>
     <string name="enter_fish_information">Enter Fish Information</string>
+    <string name="species">Species</string>
+    <string name="habitat">Habitat</string>
+    <string name="habitat_region">region</string>
+    <string name="summary">Summary</string>
     <string name="admin_page_title">Admin Page</string>
 </resources>

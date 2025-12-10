@@ -11,11 +11,16 @@ import com.example.parakeet.Parakeet_Database.Entities.User;
 @Dao
 public interface UserDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(User... user);
+    void insert(User... users);
+
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long insert(User user);
 
     @Query("DELETE FROM " + FishDatabase.USER_TABLE)
     void deleteAll();
 
     @Query("SELECT * from " + FishDatabase.USER_TABLE + " WHERE username == :username")
     LiveData<User> getUserByUsername(String username);
+
 }

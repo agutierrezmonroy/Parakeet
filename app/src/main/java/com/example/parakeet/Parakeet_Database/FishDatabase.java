@@ -21,15 +21,15 @@ import java.util.concurrent.Executors;
 
 @Database(
         entities = {User.class, Fish.class, Habitat.class},
-        version = 3,
+        version = 4,
         exportSchema = false
 )
 public abstract class FishDatabase extends RoomDatabase {
 
     private static final String DATABASE_NAME = "ParakeetDatabase";
 
-    public static final String USER_TABLE    = "user_table";
-    public static final String FISH_TABLE    = "fish_table";
+    public static final String USER_TABLE = "user_table";
+    public static final String FISH_TABLE  = "fish_table";
     public static final String HABITAT_TABLE = "habitat_table";
 
 
@@ -77,5 +77,6 @@ public abstract class FishDatabase extends RoomDatabase {
     public abstract UserDAO userDAO();
     public abstract FishDAO fishDAO();
     public abstract HabitatDAO habitatDAO();
+    public abstract UserFishHabitatDAO uhfDAO();
 }
 

@@ -14,11 +14,14 @@ import java.util.List;
 public interface FishDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Fish... fish);
+    long[] insert(Fish... fish);
 
     @Query("DELETE FROM " + FishDatabase.FISH_TABLE)
     void deleteAll();
 
     @Query("SELECT * FROM " + FishDatabase.FISH_TABLE)
     LiveData<List<Fish>> getAllFish();
+
+    @Query("SELECT * FROM " + FishDatabase.FISH_TABLE + " WHERE fish_user_id = :userId")
+    LiveData<List<Fish>> getAllFishByUserId(long userId);
 }
